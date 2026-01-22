@@ -14,6 +14,10 @@ void Level::handleInput(float dt)
 	{
 		std::cout << "left mouse pressed" << std::endl;
 	}
+	if (m_input.isKeyDown(sf::Keyboard::Scan::A))
+	{
+		std::cout << "AYE!" << std::endl;
+	}
 
 }
 

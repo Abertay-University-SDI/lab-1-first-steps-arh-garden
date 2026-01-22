@@ -23,17 +23,17 @@ void Player::changeDirection(sf::Vector2f input) {
 	if (std::abs(input.x) < m_deadZone && std::abs(input.y) < m_deadZone) {
 		return;
 	}
-	
-	if (input.x > 0) {
+
+	if (input.x > 0 && m_prevDirection != LEFT) {
 		m_prevDirection = RIGHT;
 	}
-	else if (input.x < 0) {
+	else if (input.x < 0 && m_prevDirection != RIGHT) {
 		m_prevDirection = LEFT;
 	}
-	else if (input.y > 0) {
+	else if (input.y > 0 && m_prevDirection != UP) {
 		m_prevDirection = DOWN;
 	}
-	else if (input.y < 0) {
+	else if (input.y < 0 && m_prevDirection != DOWN) {
 		m_prevDirection = UP;
 	}
 }

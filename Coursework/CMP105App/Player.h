@@ -7,9 +7,9 @@ private:
 	float m_speed = 150.f;
 	enum {
 		UP,
+		RIGHT,
 		DOWN,
-		LEFT,
-		RIGHT
+		LEFT
 	} m_prevDirection;
 	sf::CircleShape m_body;
 

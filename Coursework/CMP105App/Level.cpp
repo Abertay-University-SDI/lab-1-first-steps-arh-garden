@@ -42,7 +42,7 @@ Level::Level(sf::RenderWindow& hwnd, Input& in) :
 	BaseLevel(hwnd, in)
 {
 	// initialise game objects
-
+	m_player.start();
 }
 
 // handle user input
@@ -69,12 +69,15 @@ void Level::handleInput(float dt)
 // Update game objects
 void Level::update(float dt)
 {
+	m_player.travel(m_inputDirection, dt);
 }
 
 // Render level
 void Level::render()
 {
 	beginDraw();
+
+	m_window.draw(m_player.getDraw());
 
 	endDraw();
 }

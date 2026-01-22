@@ -2,6 +2,42 @@
 
 
 sf::Vector2f m_inputDirection;
+
+// anonymous player class
+class {
+private:
+	sf::CircleShape body;
+	float m_speed = 150.f;
+	enum {
+		UP,
+		DOWN,
+		LEFT,
+		RIGHT
+	} prevDirection;
+	
+public:
+	// technical
+	void start() {
+		body.setFillColor(sf::Color::Red);
+		body.setRadius(10);
+		body.setPosition({ 400, 300 });
+	}
+
+	sf::CircleShape getDraw() {
+		return body;
+	}
+	
+	// gameplay
+	void travel(sf::Vector2f direction, float dt) {
+		body.move(direction * m_speed * dt);
+	}
+
+	void setSpeed(float value) {
+		m_speed = value;
+	}
+
+} m_player;
+
 Level::Level(sf::RenderWindow& hwnd, Input& in) :
 	BaseLevel(hwnd, in)
 {

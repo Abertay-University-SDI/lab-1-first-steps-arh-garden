@@ -1,6 +1,4 @@
 #include "Player.h"
-#include <math.h>
-#include <iostream>
 
 // technical
 Player::Player() {
@@ -14,12 +12,12 @@ sf::CircleShape Player::getDraw() {
 }
 
 // setters
-void Player::setSpeed(float value) {
+void Player::setSpeed(float& value) {
 	m_speed = value;
 }
 
 // gameplay
-void Player::changeDirection(sf::Vector2f input) {
+void Player::changeDirection(sf::Vector2f& input) {
 	if (std::abs(input.x) < m_deadZone && std::abs(input.y) < m_deadZone) {
 		return;
 	}
@@ -38,7 +36,7 @@ void Player::changeDirection(sf::Vector2f input) {
 	}
 }
 
-void Player::travel(float dt) {
+void Player::travel(float& dt) {
 	sf::Vector2f direction;
 
 	switch (m_prevDirection) {

@@ -19,10 +19,11 @@ public:
 
 	sf::CircleShape getDraw();
 
-	// gameplay
-	void changeDirection(sf::Vector2f input);
-	void travel(float dt);
-	void setSpeed(float value);
+	// setters
+	void setSpeed(float&);
+	void changeDirection(sf::Vector2f&);
 
+	// gameplay
+	void travel(float&);
 };
 

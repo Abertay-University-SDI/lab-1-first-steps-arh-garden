@@ -21,9 +21,11 @@ public:
 
 	// setters
 	void setSpeed(float&);
+	void setPosition(const sf::Vector2f&);
 	void changeDirection(sf::Vector2f&);
 
 	// gameplay
 	void travel(float&);
+	void wrapAround(const sf::Vector2u&);
 };
 

@@ -36,6 +36,7 @@ void Level::update(float dt)
 {
 	m_player.changeDirection(m_inputDirection);
 	m_player.travel(dt);
+	m_player.wrapAround(m_window.getSize());
 }
 
 // Render level

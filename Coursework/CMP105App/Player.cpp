@@ -4,7 +4,7 @@
 Player::Player() {
 	m_body.setFillColor(sf::Color::Red);
 	m_body.setRadius(10);
-	m_body.setPosition({ 400, 300 });
+	setPosition({ 400, 300 });
 }
 
 sf::CircleShape Player::getDraw() {
@@ -16,7 +16,10 @@ void Player::setSpeed(float& value) {
 	m_speed = value;
 }
 
-// gameplay
+void Player::setPosition(const sf::Vector2f& position) {
+	m_body.setPosition(position);
+}
+
 void Player::changeDirection(sf::Vector2f& input) {
 	if (std::abs(input.x) < m_deadZone && std::abs(input.y) < m_deadZone) {
 		return;
@@ -36,6 +39,7 @@ void Player::changeDirection(sf::Vector2f& input) {
 	}
 }
 
+// gameplay
 void Player::travel(float& dt) {
 	sf::Vector2f direction;
 
@@ -55,4 +59,25 @@ void Player::travel(float& dt) {
 	}
 	
 	m_body.move(direction * m_speed * dt);
+}
+
+void Player::wrapAround(const sf::Vector2u& windowSize) {
+	sf::Vector2f position = m_body.getPosition();
+	float radius = m_body.getRadius();
+
+	// x
+	// 0 is the top left corner of the circle so a greater margin is needed
+	if (position.x < -radius * 2) {
+		m_body.setPosition({ windowSize.x + radius, position.y });
+	}
+	else if (position.x > windowSize.x + radius) {
+		m_body.setPosition({ -radius, position.y });
+	}
+	// y
+	if (position.y < -radius * 2) {
+		m_body.setPosition({ position.x, windowSize.y + radius });
+	}
+	else if (position.y > windowSize.y + radius) {
+		m_body.setPosition({ position.x, -radius });
+	}
 }

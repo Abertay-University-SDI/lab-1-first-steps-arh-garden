@@ -1,7 +1,7 @@
 #pragma once
-
 #include "Framework/BaseLevel.h"
 #include "Player.h"
+#include "Food.h"
 
 class Level : BaseLevel{
 public:
@@ -18,4 +18,5 @@ private:
 	// Default variables for level class.
 	sf::Vector2f m_inputDirection;
 	Player m_player;
+	Food m_food;
 };

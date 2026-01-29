@@ -7,12 +7,12 @@ Player::Player() {
 	setPosition({ 400, 300 });
 }
 
-sf::CircleShape Player::getDraw() {
+sf::CircleShape Player::getBody() {
 	return m_body;
 }
 
 // setters
-void Player::setSpeed(float& value) {
+void Player::setSpeed(const float& value) {
 	m_speed = value;
 }
 
@@ -20,7 +20,7 @@ void Player::setPosition(const sf::Vector2f& position) {
 	m_body.setPosition(position);
 }
 
-void Player::changeDirection(sf::Vector2f& input) {
+void Player::changeDirection(const sf::Vector2f& input) {
 	if (std::abs(input.x) < m_deadZone && std::abs(input.y) < m_deadZone) {
 		return;
 	}
@@ -39,8 +39,12 @@ void Player::changeDirection(sf::Vector2f& input) {
 	}
 }
 
-// gameplay
-void Player::travel(float& dt) {
+void Player::addScore(const int& value) {
+	m_score += value;
+}
+
+// mechanical
+void Player::travel(const float& dt) {
 	sf::Vector2f direction;
 
 	switch (m_prevDirection) {

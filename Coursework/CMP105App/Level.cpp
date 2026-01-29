@@ -34,9 +34,17 @@ void Level::handleInput(float dt)
 // Update game objects
 void Level::update(float dt)
 {
+	bool areColliding(const sf::CircleShape&, const sf::CircleShape&);
+
+	// player
 	m_player.changeDirection(m_inputDirection);
 	m_player.travel(dt);
 	m_player.wrapAround(m_window.getSize());
+
+	// food
+	if (areColliding(m_player.getBody(), m_food.getDraw())) {
+		m_food.eat(m_window.getSize(), m_player);
+	}
 }
 
 // Render level
@@ -44,8 +52,16 @@ void Level::render()
 {
 	beginDraw();
 
-	m_window.draw(m_player.getDraw());
+	m_window.draw(m_player.getBody());
+	m_window.draw(m_food.getDraw());
 
 	endDraw();
 }
 
+bool areColliding(const sf::CircleShape& a, const sf::CircleShape& b) {
+	sf::Vector2f relativeVector = a.getPosition() - b.getPosition();
+
+	float radiusSum = a.getRadius() + b.getRadius();
+
+	return relativeVector.lengthSquared() <= pow(radiusSum, 2);
+}
